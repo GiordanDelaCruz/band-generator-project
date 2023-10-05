@@ -5,6 +5,9 @@ import morgan from "morgan";
 const app = express();
 const port = 3000;
 
+/***********************************************************/
+/******              Middlewares                      ******/
+/***********************************************************/
 //Step 3 - Make the styling show up.
 //Hint 1: CSS files are static files!
 //Hint 2: The header and footer are partials.
@@ -16,12 +19,19 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-// app.use(getRndInteger);
-
+/** This function will return a random integer between the range of min to max
+ * 
+ * @param {*} min 
+ * @param {*} max 
+ * @returns random integer
+ */
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
 
+/***********************************************************/
+/******             Route Handling                    ******/
+/***********************************************************/
 app.get("/", (req, res) => {
   //Step 1 - Make the get route work and render the index.ejs file.
   res.render("index.ejs");
@@ -40,6 +50,9 @@ app.post("/submit", (req, res) => {
   });
 });
 
+/***********************************************************/
+/******              Start Server                     ******/
+/***********************************************************/
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
